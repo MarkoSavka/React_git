@@ -335,73 +335,73 @@
 
 
 
-// const propsValues = { 
-//     title: "Список смартфонів", 
-//     items: [ 
-//         "Samsung Galaxy Note20",  
-//             "Apple iPhone 12 Pro",  
-//             "Google Pixel 5",  
-//             "Huawei P40 Pro",  
-//             "OnePlus 8 Pro",  
-//             "Asus Zenfone 7 Pro" 
-//     ] 
-// } 
-// class Search extends React.Component{ 
-//     constructor(props) 
-//     { 
-//         super(props); 
-//         this.onTextChange=this.onTextChange.bind(this); 
+const propsValues = { 
+    title: "Список смартфонів", 
+    items: [ 
+        "Samsung Galaxy Note20",  
+            "Apple iPhone 12 Pro",  
+            "Google Pixel 5",  
+            "Huawei P40 Pro",  
+            "OnePlus 8 Pro",  
+            "Asus Zenfone 7 Pro" 
+    ] 
+} 
+class Search extends React.Component{ 
+    constructor(props) 
+    { 
+        super(props); 
+        this.onTextChange=this.onTextChange.bind(this); 
  
-//     } 
-//     onTextChange(e) 
-//     { 
-//        let text=e.target.value.trim(); 
-//        this.props.filter(text); 
-//     } 
-//     render() 
-//     { 
-//         return <input placeholder="Search" onChange={this.onTextChange}/> 
-//     } 
-// } 
+    } 
+    onTextChange(e) 
+    { 
+       let text=e.target.value.trim(); 
+       this.props.filter(text); 
+    } 
+    render() 
+    { 
+        return <input placeholder="Search" onChange={this.onTextChange}/> 
+    } 
+} 
  
-// class Item extends React.Component { 
-//     render() { 
-//         return <li>{this.props.name}</li> 
-//     } 
-// } 
+class Item extends React.Component { 
+    render() { 
+        return <li>{this.props.name}</li> 
+    } 
+} 
  
-// class ListItem extends React.Component { 
-//     constructor(props) 
-//     { 
-//         super(props); 
-//         this.state={items:this.props.data.items} 
+class ListItem extends React.Component { 
+    constructor(props) 
+    { 
+        super(props); 
+        this.state={items:this.props.data.items} 
  
-//         this.filterList=this.filterList.bind(this) 
-//     } 
+        this.filterList=this.filterList.bind(this) 
+    } 
  
-//     filterList(text) 
-//     { 
-//        let filteredList= this.props.data.items.filter(function(item){ 
-//             return item.toLowerCase().search(text.toLowerCase())!==-1 
-//         }) 
-//         this.setState({items:filteredList}) 
-//     } 
-//     render() { 
-//         return ( 
-//             <div> 
-//                 <h1>{this.props.data.title}</h1> 
-//                 <Search filter={this.filterList}/> 
-//                 <ul> 
-//                    { 
-//                     this.state.items.map(function(item) 
-//                     { 
-//                         return <Item name={item}/> 
-//                     }) 
-//                    } 
-//                 </ul> 
-//             </div> 
-//         ) 
-//     } 
-// } 
+    filterList(text) 
+    { 
+       let filteredList= this.props.data.items.filter(function(item){ 
+            return item.toLowerCase().search(text.toLowerCase())!==-1 
+        }) 
+        this.setState({items:filteredList}) 
+    } 
+    render() { 
+        return ( 
+            <div> 
+                <h1>{this.props.data.title}</h1> 
+                <Search filter={this.filterList}/> 
+                <ul> 
+                   { 
+                    this.state.items.map(function(item) 
+                    { 
+                        return <Item name={item}/> 
+                    }) 
+                   } 
+                </ul> 
+            </div> 
+        ) 
+    } 
+} 
  
 ReactDOM.createRoot(document.getElementById('app')).render(<ListItem data={propsValues} />)
