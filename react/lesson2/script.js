@@ -213,7 +213,7 @@
 //     } 
 //     unmount() 
 //     { 
-//       root.unmount(); 
+//       root.unmount(); //повністю руйнує дерево
 //     } 
 //     render(){ 
 //         console.log("render"); 
@@ -230,7 +230,7 @@
 
 
 
-
+//складені компоненти
 // class Item extends React.Component 
 // { 
 //     render() 
@@ -262,6 +262,7 @@
 
 
 
+//js обʼєкт,який складається:1 поле тайтл і ементу айтемс який є масивом
 // const propsValues = { 
 //     title: "Students", 
 //     items: [ 
@@ -284,7 +285,7 @@
 //                 <h1>{this.props.data.title}</h1> 
 //                 <ul> 
 //                    { 
-//                     this.props.data.items.map(function(item) 
+//                     this.props.data.items.map(function(item) //цикл. map ретурнить дані
 //                     { 
 //                         return <Item name={item}/> 
 //                     }) 
@@ -316,64 +317,20 @@
 //     constructor(props) 
 //     { 
 //         super(props); 
-//         this.onTextChange=this.onTextChange.bind(this); 
+//         this.onTextChange=this.onTextChange.bind(this); //отут байнд
  
 //     } 
-//     onTextChange(e) 
+//     onTextChange(e)
 //     { 
-//        let text=e.target.value.trim(); 
-//        this.props.filter(text); 
-//     } 
+//        let text=e.target.value.trim();  //e.target.value.trim() - видалення пробілів
+//        this.props.filter(text); //щоб доступитись тут до пропсів-потрібно забайндити це все в конструкторі
+//     } //filter-батьківський метод,в який передаємо текст
 //     render() 
 //     { 
 //         return <input placeholder="Search" onChange={this.onTextChange}/> 
 //     } 
 // } 
  
-// class Item extends React.Component { 
-//     render() { 
-//         return <li>{this.props.name}</li> 
-//     } 
-// } 
- 
-// class ListItem extends React.Component { 
-//     constructor(props) 
-//     { 
-//         super(props); 
- 
-//         this.filterList=this.filterList.bind(this); 
-//     } 
- 
-//     filterList(text) 
-//     { 
-//         alert(text); 
-//        let filteredList= this.props.data.items.filter(function(item){ 
-//             return item.toLowerCase().search(text.toLowerCase())!==-1 
-//         }) 
-//         alert(filteredList); 
- 
- 
- 
-//     } 
-//     render() { 
-//         return ( 
-//             <div> 
-//                 <h1>{this.props.data.title}</h1> 
-//                 <Search filter={this.filterList}/> 
-//                 <ul> 
-//                    { 
-//                     this.props.data.items.map(function(item) 
-//                     { 
-//                         return <Item name={item}/> 
-//                     }) 
-//                    } 
-//                 </ul> 
-//             </div> 
-//         ) 
-//     } 
-// } 
- 
-// ReactDOM.createRoot(document.getElementById('app')).render(<ListItem data={propsValues} />)
 
 
 
@@ -424,15 +381,10 @@
  
 //     filterList(text) 
 //     { 
-        
 //        let filteredList= this.props.data.items.filter(function(item){ 
 //             return item.toLowerCase().search(text.toLowerCase())!==-1 
 //         }) 
 //         this.setState({items:filteredList}) 
-        
- 
- 
- 
 //     } 
 //     render() { 
 //         return ( 
