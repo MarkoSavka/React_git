@@ -1,13 +1,25 @@
 //useState - хук стану React
 
+//props
+//<Article title="My Article Title" author="My Name" /> це ми в батьківському компоненті використовуємо дочірній(Author)
+
+//Тоді всередині Article ви можете отримати доступ до title і author через props
+//export function Article(props) {
+//     return (
+//         <div>
+//             <h1>{props.title}</h1>
+//             <p>{props.author}</p>
+//         </div>
+//     );
+// }
 
 import React, { useState } from 'react';
 
 export function Article()
 {
-    const [title, setTitle] = useState(''); 
-    const [author, setAuthor] = useState('');
-    const [body, setBody] = useState('');
+    const [title, setTitle] = useState(''); //змінна стану title та функція setTitle
+    const [author, setAuthor] = useState(''); //useState повертає масив з двох елементів: поточне значення стану(author) та функцію для його оновлення
+    const [body, setBody] = useState(''); //Ці два значення можна отримати за допомогою деструктуризації масиву, const [body, setBody] =
     const [newtitle, setNewTitle] = useState('');
     const [newauthor, setNewAuthor] = useState('');
     const [newbody, setNewBody] = useState('');
