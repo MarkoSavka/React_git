@@ -1,0 +1,42 @@
+{ 
+    "products": { 
+        "title": "My List of Laptops", 
+        "items": [ 
+            { 
+                "id": 1, 
+                "name": "ASUS ZenBook 14", 
+                "price": 29000 
+            }, 
+            { 
+                "id": 2, 
+                "name": "Apple MacBook Air 13", 
+                "price": 35000 
+            }, 
+            { 
+                "id": 3, 
+                "name": "Asus ROG Strix G15", 
+                "price": 47000 
+            }, 
+            { 
+                "id": 4, 
+                "name": "Dell Vostro 15", 
+                "price": 20000 
+            }, 
+            { 
+                "id": 5, 
+                "name": "Acer Aspire 7", 
+                "price": 23000 
+            }, 
+            { 
+                "id": 6, 
+                "name": "Lenovo IdeaPad 3", 
+                "price": 31000 
+            }, 
+            { 
+                "id": 7, 
+                "name": "HP Pavilion 15", 
+                "price": 24000 
+            } 
+        ] 
+    } 
+}
