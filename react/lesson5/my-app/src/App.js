@@ -33,7 +33,7 @@ function App(){
             )
           }
         </div>
-        <h1>Email</h1>
+
         <div>
           <label for="email">Email:</label>
           <input type="email" name="email" id="email" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.email}></input>
@@ -46,7 +46,7 @@ function App(){
             )
           }
         </div>
-        <h1>Profession</h1>
+
         <label for="proffession">Profession</label>
         <select id="proffession" name="proffession" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.proffession}>
           {
@@ -60,6 +60,23 @@ function App(){
               <span>{formik.errors.proffession}</span>
             )
           }
+
+        <div>
+          <label for="age">Age:</label>
+          <input name="age" id="age" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.age}></input>
+          {
+            //валідація даних
+            //touched-обʼєкт який вказує чи користувач взаємодіяв з цим полем
+            //errors буде якшо не пройде валідацію
+            formik.touched.age && formik.errors &&(
+              <span>{formik.errors.age}</span>
+            )
+          }
+        </div>
+
+        <div>
+          <button type="submit">Submit</button>
+        </div>
       </form>
     </div>
   )
