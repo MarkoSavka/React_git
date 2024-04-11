@@ -1,17 +1,25 @@
 import { useFormik } from "formik";
+import * as Yup from 'yup';
+
 //formik це хук
 function App(){
-  const proffession=['Developer','Designer','Other'];
+  const proffessions=['Developer','Designer','Other'];
   const formik=useFormik({
     initialValues:{
       name:'',
       email:'',
-      proffession:proffession[0],
+      proffessions:proffessions[0],
       age:''
     },
     onSubmit:function(values){
-      alert(`Name:${values.name} Email:${values.email} Proffession:${values.proffession} Age:${values.age}`);
-    }
+      alert(`Name:${values.name} Email:${values.email} Proffession:${values.proffessions} Age:${values.age}`);
+    },
+    validationSchema:Yup.object({ //Yup-псевдонім,object-функція
+      name:Yup.string().label('Name').required(),
+      email:Yup.string().email().required(),
+      proffession:Yup.string().oneOf(proffessions,"The profession you chose doesnt exist"),
+      age:Yup.number().min(18,'You are younger then 18').required()
+    })
   });
 
   //formik.handleChange обробник зміни дії елементів
@@ -23,7 +31,7 @@ function App(){
         <h1>Register</h1>
         <div>
           <label for="name">Name:</label>
-          <input name="name" id="name" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.name}></input>
+          <input name="name" id="name" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.name} title="Input Name"></input>
           {
             //валідація даних
             //touched-обʼєкт який вказує чи користувач взаємодіяв з цим полем
@@ -47,8 +55,8 @@ function App(){
           }
         </div>
 
-        <label for="proffession">Profession</label>
-        <select id="proffession" name="proffession" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.proffession}>
+        <label for="proffessions">Profession</label>
+        <select id="proffessions" name="proffessions" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.proffessions}>
           {
             proffessions.map((proffession,index)=>(
               <option value={proffession} key={index}>{proffession}</option>
@@ -75,7 +83,7 @@ function App(){
         </div>
 
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit" disabled={!(formik.isValid&&formik.dirty)}>Submit</button>
         </div>
       </form>
     </div>
