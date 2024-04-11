@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import * as Yup from 'yup';
 
 //formik це хук
+//formik має свої стандартні обробники потипу: formik.handleChange formik.handleBlur
 function App(){
   const proffessions=['Developer','Designer','Other'];
   const formik=useFormik({
@@ -46,9 +47,6 @@ function App(){
           <label for="email">Email:</label>
           <input type="email" name="email" id="email" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.email}></input>
           {
-            //валідація даних
-            //touched-обʼєкт який вказує чи користувач взаємодіяв з цим полем
-            //errors буде якшо не пройде валідацію
             formik.touched.email && formik.errors &&(
               <span>{formik.errors.email}</span>
             )
@@ -73,9 +71,6 @@ function App(){
           <label for="age">Age:</label>
           <input name="age" id="age" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.age}></input>
           {
-            //валідація даних
-            //touched-обʼєкт який вказує чи користувач взаємодіяв з цим полем
-            //errors буде якшо не пройде валідацію
             formik.touched.age && formik.errors &&(
               <span>{formik.errors.age}</span>
             )
