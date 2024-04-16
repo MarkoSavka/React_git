@@ -135,6 +135,7 @@
 
 //AJAX
 //npm i json-server
+//json-server start (мб така команда запуску джейсон сервера хз)
 //const root= ReactDOM.createRoot(document.getElementById("app")) 
 
 //class ItemsList extends React.Component{
@@ -206,9 +207,9 @@ function ItemsList() {
   const [items, setItems] = React.useState([]);
 
   React.useEffect(()=>{ //перед рендером нам потрібен перше запит на сервер,тому useEffect
-    fetch("https://jsonplaceholder.typicode.com/comments")  //робимо фетч запит
-    .then(response=>response.json())  //і робимо проміси
-    .then(data=>setItems(data))  //прочитали дані і записали
+    fetch("https://jsonplaceholder.typicode.com/comments")  //робимо фетч запит,функція фетч повертає проміс
+    .then(response=>response.json())  //і робимо обробник проміса //fetch повертає проміс, який, коли виконується, видає об'єкт відповіді (response). Promise представляє завершення або невдачу асинхронної операції, і його можливий результат
+    .then(data=>setItems(data))  //прочитали дані і записали. data - це результат попереднього проміса в ланцюжку, а саме response.json()
   }),[] 
 
   return (

@@ -5,7 +5,44 @@ function Timer()
 {
     const [time,setTime]=React.useState(0);
     const [timer,setTimer]=React.useState(0);
-    const [radioValue, setRadioValue] = React.useState('1');
+    const [radioValue, setRadioValue] = React.useState(1);
+    // const [timer, setTimer] = React.useState({
+    //     seconds: 0,
+    //     minutes: 0,
+    //     hours: 0
+    // });
+
+    // const handleTimer = () => {
+    //     setTimer(prev => {
+    //         let newSeconds = prev.seconds - 1;
+    //         let newMinutes = prev.minutes;
+    //         let newHours = prev.hours;
+    
+    //         if (newSeconds < 0) {
+    //             newSeconds = 59;
+    //             newMinutes -= 1;
+    //         }
+    
+    //         if (newMinutes < 0) {
+    //             newMinutes = 59;
+    //             newHours -= 1;
+    //         }
+    
+    //         if (newHours < 0) {
+    //             newHours = 0;
+    //             newMinutes = 0;
+    //             newSeconds = 0;
+    //         }
+    
+    //         return { hours: newHours, minutes: newMinutes, seconds: newSeconds };
+    //     });
+    // };
+      
+    const [timerSettings] = React.useState([
+        {title: 'Cекунди', radioValue: 1, id: 'SecRadio'},
+        {title: 'Хвилини', radioValue: 2, id: 'MinRadio'},
+        {title: 'Години', radioValue: 3, id: 'HourRadio'},
+    ])
 
     let idTime=0;
     
@@ -22,17 +59,17 @@ function Timer()
 
         //RadioButtons
         const inputtimerbtn = document.getElementById('inputtimerbtn');
-        if (radioValue === '1') {
+        if (radioValue === 1) {
             inputtimerbtn.placeholder = "Введіть секунди";
-        } else if (radioValue === '2') {
+        } else if (radioValue === 2) {
             inputtimerbtn.placeholder = "Введіть хвилини";
-        } else if (radioValue === '3') {
+        } else if (radioValue === 3) {
             inputtimerbtn.placeholder = "Введіть години";
         }
 
-        //Timer
-        const timerbtn=document.getElementById('timerbtn');
-        timerbtn.addEventListener("click",startTimerFunc);
+        // //Timer
+        // const timerbtn=document.getElementById('timerbtn');
+        // timerbtn.addEventListener("click",startTimerFunc);
 
         const stoptimerbtn=document.getElementById('stoptimerbtn');
         stoptimerbtn.addEventListener("click",stopTimerFunc);
@@ -42,7 +79,7 @@ function Timer()
            timeBtn.removeEventListener("click",begin);
            droptimebtn.removeEventListener("click",droptime);
 
-           timerbtn.removeEventListener("click",startTimerFunc);
+        //    timerbtn.removeEventListener("click",startTimerFunc);
            stoptimerbtn.removeEventListener("click",stopTimerFunc);
         }
     },[radioValue])
@@ -79,36 +116,36 @@ function Timer()
         setTime((time)=>time+1);
     }
 
-
-
     //Timer
     let newTimer=0;
     let newIdTimer=0;
 
     function reverseTick()
     {
-       setTimer((timer)=>timer-1);
-       //console.log.toString(setTimer((timer)=>timer-1));
-
-       if(newIdTimer<=0)
-       {
-        setTimer(0); 
-        clearInterval(newIdTimer);
-        newIdTimer=0;
-       }
+       setTimer((prev) => prev - 1);
     }
 
     function saveInput(e)
     {
-        if(e.target.value<0)
+        const value = parseInt(e.target.value);
+        if(value<0)
         {
             alert("Число менше 0")
         }else
         {
-            newTimer = Number(e.target.value);
-            console.log(` saveInput newTimer: ${newTimer}`);
+            setTimer(value);
+            console.log(` saveInput newTimer: ${value}`);
         }
     }
+
+    React.useEffect(() => {
+        if(timer <= 0) {
+            setTimer(0);
+            clearInterval(newIdTimer);
+            newIdTimer=0;
+            return;
+        }
+    }, [timer])
 
     function startTimerFunc()
     {
@@ -117,7 +154,6 @@ function Timer()
         const hourbtn=document.getElementById('HourRadio');
 
         if (secbtn.checked) {
-            setTimer(newTimer);
             newIdTimer = setInterval(()=>reverseTick(),1000);
         }
         if (minbtn.checked) {
@@ -128,6 +164,7 @@ function Timer()
         }
         
     }
+
     function stopTimerFunc()
     {
         setTimer(0); 
@@ -149,17 +186,32 @@ function Timer()
                 <br></br>
                 <br></br>
                 <p>Таймер: </p>
-                <input type="radio" id="SecRadio" name="option" value="1" checked={radioValue === '1'} onChange={(e) => setRadioValue(e.target.value)}></input>
+                {/* <input type="radio" id="SecRadio" ref={secondsRef} name="option" value="1" checked={radioValue === '1'} onChange={(e) => setRadioValue(e.target.value)}></input>
                 <label for="option1">Секунди</label>
                 <input type="radio" id="MinRadio" name="option" value="2" checked={radioValue === '2'} onChange={(e) => setRadioValue(e.target.value)}></input>
                 <label for="option2">Хвилини</label>
                 <input type="radio" id="HourRadio" name="option" value="3" checked={radioValue === '3'} onChange={(e) => setRadioValue(e.target.value)}></input>
-                <label for="option3">Години</label>
+                <label for="option3">Години</label> */}
+                {timerSettings.map((item) => {
+                    return (
+                        <>
+                            <input 
+                                type="radio" 
+                                id={item.id} 
+                                name="option" 
+                                value={radioValue} 
+                                checked={radioValue === item.radioValue} 
+                                onChange={(e) => setRadioValue(item.radioValue)}>
+                            </input>
+                            <label for={item.id}>{item.title}</label>
+                        </>
+                    )
+                })}
                 <br></br><br></br>
 
-                <input id="inputtimerbtn" onChange={saveInput} type="number"></input>
+                <input id="inputtimerbtn" onChange={saveInput} type="number" min={1}></input>
                 <br></br><br></br>
-                <button id="timerbtn">Start</button>
+                <button id="timerbtn" onClick={startTimerFunc}>Start</button>
                 <button id="stoptimerbtn">Stop</button>
 
                 <p>Залишок: {timer}</p>
